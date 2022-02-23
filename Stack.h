@@ -12,6 +12,8 @@
 #include "Car.h"
 #include <Windows.h>
 #include <unistd.h>
+#include <cstdlib>     /* srand, rand */
+#include <ctime>       /* time */
 
 
 using namespace std;
@@ -25,6 +27,15 @@ public:
 
     Car *head = nullptr;
     Car *tail = nullptr;
+    string name = "";
+
+    const string &getName() const;
+
+    void setName(const string &name);
+
+    int getStackSize() const;
+
+    void setStackSize(int stackSize);
 
     int stackSize = 0;
 
@@ -41,6 +52,7 @@ public:
 
     void Prepend(Car* newCar);
     void Push(Car* newCar);
+    void textcolor(int color);
     string Pop();
     string Peek();
     bool isEmpty();

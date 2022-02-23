@@ -65,9 +65,6 @@ void Garage::arriveCar(Car* newCar) {
 
 }
 
-void Garage::carWaiting() {
-
-}
 
 bool Garage::checkCarPos(Car* newCar) {
     Car *temp;

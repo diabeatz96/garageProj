@@ -8,6 +8,9 @@ int main() {
 Garage newGarage;
 Stack newstack;
 
+newGarage.garage1.setName("Garage 1");
+newGarage.garage2.setName("Garage 2");
+
 newstack.loadFile();
 newstack.reverse();
 

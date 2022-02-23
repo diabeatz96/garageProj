@@ -67,7 +67,11 @@ void Stack::displayAll() {
 
     while (current != nullptr) {
         usleep(1000000);
-            std::cout << R"(
+        srand (time(NULL));
+        int color = rand() % 14 + 1;
+
+        textcolor(color);
+        std::cout << R"(
 
                  ______
                 /|_||_\`.__
@@ -76,7 +80,7 @@ void Stack::displayAll() {
 
 )";
         cout << "NAME:" << current-> name << "\t";
-        cout << "ARRIVING: " << current->garage << "\t";
+        cout << "GARAGE: " << this->getName() << "\t";
         cout << "TIMES MOVED: " << current->timesMoved << "\t";
         cout << endl;
         current = current->next;
@@ -118,5 +122,36 @@ void Stack::reverse() {
 
 
     head = previous;
+}
+
+void Stack::textcolor(int color) {
+        static int __BACKGROUND;
+
+        HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+        CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
+
+
+        GetConsoleScreenBufferInfo(h, &csbiInfo);
+
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
+                                color + (__BACKGROUND << 4));
+}
+
+/** Simple Getter and Setter Methods */
+
+const string &Stack::getName() const {
+    return name;
+}
+
+void Stack::setName(const string &name) {
+    Stack::name = name;
+}
+
+int Stack::getStackSize() const {
+    return stackSize;
+}
+
+void Stack::setStackSize(int stackSize) {
+    Stack::stackSize = stackSize;
 }
 

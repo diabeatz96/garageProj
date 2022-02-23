@@ -22,7 +22,6 @@ public:
     void decideAction(Stack* inputStack);
     void departCar(Car* newCar);
     void arriveCar(Car* newCar);
-    void carWaiting();
     bool checkCarPos(Car* newCar);
     void printOutput();
 
