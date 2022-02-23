@@ -5,8 +5,26 @@
 #ifndef GARAGEPROJ_GARAGE_H
 #define GARAGEPROJ_GARAGE_H
 
-
+#include "Stack.h"
+#include "iostream"
+#include "string"
+#include "Car.h"
 class Garage {
+
+public:
+
+    Stack garage1;
+    Stack garage2;
+    Stack street;
+    Stack tempStack;
+
+
+    void decideAction(Stack* inputStack);
+    void departCar(Car* newCar);
+    void arriveCar(Car* newCar);
+    void carWaiting();
+    void checkCarPos();
+    void printOutput();
 
 };
 
