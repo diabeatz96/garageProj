@@ -23,7 +23,7 @@ public:
     void departCar(Car* newCar);
     void arriveCar(Car* newCar);
     void carWaiting();
-    void checkCarPos();
+    bool checkCarPos(Car* newCar);
     void printOutput();
 
 };

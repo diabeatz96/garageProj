@@ -10,6 +10,8 @@
 #include "iostream"
 #include "fstream"
 #include "Car.h"
+#include <Windows.h>
+#include <unistd.h>
 
 
 using namespace std;

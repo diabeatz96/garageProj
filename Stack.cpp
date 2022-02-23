@@ -66,8 +66,19 @@ void Stack::displayAll() {
     Car * current = head;
 
     while (current != nullptr) {
-        cout << "NAME:" << current-> name << endl;
-        cout << "GARAGE: " << current->garage << endl;
+        usleep(1000000);
+            std::cout << R"(
+
+                 ______
+                /|_||_\`.__
+               (   _    _ _\
+              =`-(_)--(_)-'
+
+)";
+        cout << "NAME:" << current-> name << "\t";
+        cout << "ARRIVING: " << current->garage << "\t";
+        cout << "TIMES MOVED: " << current->timesMoved << "\t";
+        cout << endl;
         current = current->next;
     }
 }
