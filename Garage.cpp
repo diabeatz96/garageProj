@@ -9,6 +9,11 @@ void Garage::departCar(Car* newCar) {
     bool isGarage1 = true;
     bool isGarage2 = true;
 
+    /**
+     *  Base-Case Check to see if in array, if not we just return, no popping no nothing.
+     */
+
+
         temp = garage1.head;
         while(temp != nullptr) {
             if(temp->name == newCar->name) {
