@@ -8,12 +8,14 @@
 
 using namespace std;
 
+/**
+ * Car should be a data type for data not a node class itself.
+ */
 struct Car {
     string name;
     string garage;
     int timesMoved{};
     Car *next = nullptr;
-    Car *prev = nullptr;
     Car() {
         timesMoved = 0;
         name = "";

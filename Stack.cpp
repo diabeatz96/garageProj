@@ -16,7 +16,11 @@ void Stack::loadFile() {
     string line;
     inFile.open("cars.txt"); //Absolute path for now cause im bad.
 
-    /* Check if file is open, then we check if head is nullptr, if its not nullptr then do normal functionality */
+    /* Check if file is open, then we check if head is nullptr, if its not nullptr then do normal functionality
+     *
+     *
+     * **** Check first line then put into lane. No need to store into seperate stack.
+     * */
     if(inFile.is_open()) {
         while (inFile >> line) {
             Car* temp = new Car();
@@ -86,6 +90,7 @@ void Stack::displayAll() {
         current = current->next;
     }
 }
+
 
 void Stack::Push(Car *newCar) {
     Car *temp = new Car(*(newCar));

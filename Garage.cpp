@@ -4,7 +4,17 @@
 
 #include "Garage.h"
 
+
+/**
+ *  Things I need to solve.
+ *  1.) If a car departs and garage 1 or 2 is full then go to street stack.
+ *  2.) Move blocking cars to the street
+ *  3.) Move to two when 1 is full. Science.
+ *
+ *  @params (Car* newCar, Stack* Lane);
+ */
 void Garage::departCar(Car* newCar) {
+
     Car *temp;
     bool isGarage1 = true;
     bool isGarage2 = true;
@@ -42,6 +52,8 @@ void Garage::departCar(Car* newCar) {
             }
         }
 
+        /** Lane 1 and Lane 2 logic **/
+
         if(isGarage1 && !isGarage2) {
             while(tempStack.head != nullptr) {
                 garage1.Push(tempStack.head);
@@ -65,6 +77,11 @@ void Garage::arriveCar(Car* newCar) {
 
 }
 
+/*
+ * Don't repeat yourself
+ * Make sure to include function depart Car in checkPos so
+ * you can reduce logic repetition.
+ */
 
 bool Garage::checkCarPos(Car* newCar) {
     Car *temp;
@@ -72,7 +89,7 @@ bool Garage::checkCarPos(Car* newCar) {
     temp = garage1.head;
     while (temp != nullptr) {
         if (temp->name == newCar->name) {
-            return true;
+            return true; // Call function that checks where car is located
         }
         temp = temp->next;
     }
@@ -96,11 +113,9 @@ bool Garage::checkCarPos(Car* newCar) {
 void Garage::decideAction(Stack * inputStack) {
     while(inputStack->head != nullptr) {
         if(inputStack->head->garage == "A") {
-            inputStack->head->timesMoved += 1;
             arriveCar( inputStack->head);
             inputStack->Pop();
         } else {
-            inputStack->head->timesMoved += 1;
             if(checkCarPos(inputStack->head)) {
                 departCar(inputStack->head);
             }
