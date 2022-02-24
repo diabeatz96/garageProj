@@ -59,6 +59,33 @@ string Stack::Pop() {
     return "Node Popped";
 }
 
+string Stack::PopMulti(int amt) {
+    Car* temp;
+
+
+    if (head == nullptr) {
+        return "NULL PTR";
+    }
+
+    if(amt == 0) {
+        temp = head;
+        head = head->next;
+        stackSize--;
+        return "ONE NODE ADDED";
+    }
+    for(int i = 0; i < amt; i++) {
+
+        temp = head;
+        head = head->next;
+        stackSize--;
+    }
+
+
+    delete temp;
+    return to_string(amt) + "Nodes Popped";
+}
+
+
 string Stack::Peek() {
     return isEmpty() ? "You don't have a head my friend" : "Your name is " + head->name + " and action is " + head->action;
 }

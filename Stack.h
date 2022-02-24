@@ -65,6 +65,7 @@ public:
 
     void displayAll();
 
+    string PopMulti(int amt);
 };
 
 #endif //GARAGEPROJ_STACK_H

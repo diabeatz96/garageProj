@@ -23,50 +23,51 @@ void Garage::departCar(Stack &lane, bool isLane1) {
     * 2.) Then push cars back into the same lane they were put out of.
     */
 
+   int tempsize = 0;
+
+
    tempStack.reverse();
    temp = tempStack.head;
 
      if (isLane1) {
-         lane1.Pop();
-         if (temp->next == nullptr) {
+         if (temp == nullptr) {
              lane2.Push(temp);
          } else {
-             while (temp != nullptr) {
+             while (temp->next != nullptr) {
                  if (lane2.stackSize < 10) {
                      lane2.Push(temp);
                      temp = temp->next;
-                     tempCarInLane++;
-                     lane2.stackSize++;
+                     tempStack.Pop();
+                     tempsize++;
                  } else {
                      street.Push(temp);
                      temp = temp->next;
-                     street.stackSize++;
+                     tempStack.Pop();
                  }
              }
          }
 
      } else {
-         lane2.Pop();
          if (temp->next == nullptr) {
              lane1.Push(temp);
-             lane1.stackSize++;
          } else {
              while (temp->next != nullptr) {
                  if (lane1.stackSize < 10) {
                      lane1.Push(temp);
                      temp = temp->next;
-                     tempCarInLane++;
-                     lane1.stackSize++;
+                     tempStack.Pop();
+                     tempsize++;
                  } else {
                      street.Push(temp);
+                     tempStack.Pop();
                      temp = temp->next;
-                     street.stackSize++;
                  }
              }
          }
      }
 
-    returnCar(tempCarInLane, isLane1);
+    tempStack.Pop();
+    returnCar(tempsize, isLane1);
 
 }
 
@@ -86,7 +87,7 @@ void Garage::arriveCar(Car* newCar) {
 bool Garage::checkCarPos(Car* newCar) {
     Car *temp;
     bool nameTrue = false;
-
+    int popCount = 0;
 
     /**
      * BASE CASE FOR NAME NOT IN LIST
@@ -119,27 +120,47 @@ bool Garage::checkCarPos(Car* newCar) {
     temp = lane1.head;
     while (temp != nullptr) {
         if (temp->name == newCar->name) {
+            lane1.PopMulti(popCount);
+            tempStack.Push(temp);
             departCar(lane1, true);
             return true; // Call function that checks where car is located
         }
         tempStack.Push(temp);
         temp = temp->next;
-        lane1.Pop();
+        popCount++;
     }
 
     /**
     * Case 2: New car is in lane2
     */
 
+    /*
+    temp = tempStack.head;
+
+    while(temp->next != nullptr) {
+        tempStack.Pop();
+        temp = temp->next;
+    }
+     */
+
+    for(int i = 0; i < popCount; i++) {
+        tempStack.Pop();
+    }
+
+    popCount = 0;
+
+
     temp = lane2.head;
     while (temp != nullptr) {
         if (temp->name == newCar->name) {
+            lane2.PopMulti(popCount);
+            tempStack.Push(temp);
             departCar(lane2, false);
             return true;
         }
         tempStack.Push(temp);
         temp = temp->next;
-        lane2.Pop();
+        popCount++;
     }
 
     return false;
@@ -165,6 +186,7 @@ void Garage::decideAction(Stack * inputStack) {
 
 void Garage::returnCar(int tempCars, bool isLane1) {
     if (isLane1) {
+        lane1.Pop();
         for (int i = 0; i < tempCars; i++) {
             lane1.Push(lane2.head);
             lane2.Pop();
@@ -178,6 +200,7 @@ void Garage::returnCar(int tempCars, bool isLane1) {
             }
         }
     } else {
+        lane2.Pop();
         for (int i = 0; i < tempCars; i++) {
             lane2.Push(lane1.head);
             lane1.Pop();
