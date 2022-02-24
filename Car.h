@@ -16,7 +16,7 @@ using namespace std;
 
 struct Car {
     string name;
-    string garage;
+    string action;
     int timesMoved{};
     Car *next = nullptr;
     Car() {

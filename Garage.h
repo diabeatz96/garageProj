@@ -17,12 +17,14 @@ public:
     Stack lane2;
     Stack street;
     Stack tempStack;
+    int tempCarInLane;
 
 
     void decideAction(Stack* inputStack);
-    void departCar(Car* newCar, Stack& lane1, bool isLane1);
+    void departCar(Stack &lane, bool isLane1);
     void arriveCar(Car* newCar);
     bool checkCarPos(Car* newCar);
+    void returnCar(int tempCars, bool isLane);
     void printOutput();
 
 };

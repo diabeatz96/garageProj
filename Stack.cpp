@@ -27,13 +27,13 @@ void Stack::loadFile() {
             Car* temp = new Car();
             if(head == nullptr) {
                 head = temp;
-                head->garage = line;
+                head->action = line;
                 inFile >> line;
                 head->name = line;
                 stackSize++;
             } else {
                 Prepend(temp);
-                head->garage = line;
+                head->action = line;
                 inFile >> line;
                 head->name = line;
                 stackSize++;
@@ -60,7 +60,7 @@ string Stack::Pop() {
 }
 
 string Stack::Peek() {
-    return isEmpty() ? "You don't have a head my friend" : "Your name is " + head->name + " and garage is " + head->garage;
+    return isEmpty() ? "You don't have a head my friend" : "Your name is " + head->name + " and action is " + head->action;
 }
 
 bool Stack::isEmpty() {

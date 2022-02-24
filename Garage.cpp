@@ -13,39 +13,67 @@
  *
  *  @params (Car* newCar, Stack* Lane);
  */
-void Garage::departCar(Car* newCar, Stack& lane, bool isLane1) {
+void Garage::departCar(Stack &lane, bool isLane1) {
 
     Car *temp;
    /**
     * Lane 1 case
+    *
+    * 1.) If pushing in a lane, push cars to other lane, if lane is full then push to street,
+    * 2.) Then push cars back into the same lane they were put out of.
     */
 
+   tempStack.reverse();
    temp = tempStack.head;
 
-    if(isLane1) {
-        lane1.Pop();
-        while (temp->next != nullptr) {
-            lane2.Push(temp);
-            temp = temp->next;
-        }
-    } else {
-        lane2.Pop();
-        while (temp->next != nullptr) {
-            lane1.Push(temp);
-            temp = temp->next;
-        }
-    }
+     if (isLane1) {
+         lane1.Pop();
+         if (temp->next == nullptr) {
+             lane2.Push(temp);
+         } else {
+             while (temp != nullptr) {
+                 if (lane2.stackSize < 10) {
+                     lane2.Push(temp);
+                     temp = temp->next;
+                     tempCarInLane++;
+                     lane2.stackSize++;
+                 } else {
+                     street.Push(temp);
+                     temp = temp->next;
+                     street.stackSize++;
+                 }
+             }
+         }
 
-    /**
-     *  Base-Case Check to see if in array, if not we just return, no popping no nothing.
-     */
+     } else {
+         lane2.Pop();
+         if (temp->next == nullptr) {
+             lane1.Push(temp);
+             lane1.stackSize++;
+         } else {
+             while (temp->next != nullptr) {
+                 if (lane1.stackSize < 10) {
+                     lane1.Push(temp);
+                     temp = temp->next;
+                     tempCarInLane++;
+                     lane1.stackSize++;
+                 } else {
+                     street.Push(temp);
+                     temp = temp->next;
+                     street.stackSize++;
+                 }
+             }
+         }
+     }
+
+    returnCar(tempCarInLane, isLane1);
 
 }
 
 void Garage::arriveCar(Car* newCar) {
 
     if(lane1.stackSize == 10  && lane2.stackSize == 10) { cout << "GARAGE FULL. GO HOME"; return;}
-     lane1.stackSize <= 10 ? lane1.Push(newCar) : lane2.Push(newCar);
+     lane1.stackSize < 10 ? lane1.Push(newCar) : lane2.Push(newCar);
 
 }
 
@@ -57,9 +85,32 @@ void Garage::arriveCar(Car* newCar) {
 
 bool Garage::checkCarPos(Car* newCar) {
     Car *temp;
+    bool nameTrue = false;
 
-    Stack Lane1Copy = lane1;
-    Stack Lane2Copy = lane2;
+
+    /**
+     * BASE CASE FOR NAME NOT IN LIST
+     */
+
+    temp = lane1.head;
+    while (temp != nullptr) {
+        if (temp->name == newCar->name) {
+            nameTrue = true;
+        }
+        temp = temp->next;
+    }
+
+    temp = lane2.head;
+    while (temp != nullptr) {
+        if (temp->name == newCar->name) {
+            nameTrue = true;
+        }
+        temp = temp->next;
+    }
+
+    if(nameTrue == false) {
+        return true;
+    }
 
     /**
      * Case 1: New car is in lane1
@@ -68,7 +119,7 @@ bool Garage::checkCarPos(Car* newCar) {
     temp = lane1.head;
     while (temp != nullptr) {
         if (temp->name == newCar->name) {
-            departCar(newCar, lane1, true);
+            departCar(lane1, true);
             return true; // Call function that checks where car is located
         }
         tempStack.Push(temp);
@@ -83,22 +134,13 @@ bool Garage::checkCarPos(Car* newCar) {
     temp = lane2.head;
     while (temp != nullptr) {
         if (temp->name == newCar->name) {
-            departCar(newCar, lane2, false);
+            departCar(lane2, false);
             return true;
         }
         tempStack.Push(temp);
         temp = temp->next;
         lane2.Pop();
     }
-
-    /**
-   * Case 3: Neither is the case
-   */
-
-    lane1 = Lane1Copy;
-    lane2 = Lane2Copy;
-
-    tempStack.stackSize = 0;
 
     return false;
 }
@@ -111,12 +153,42 @@ bool Garage::checkCarPos(Car* newCar) {
 
 void Garage::decideAction(Stack * inputStack) {
     while(inputStack->head != nullptr) {
-        if(inputStack->head->garage == "A") {
+        if(inputStack->head->action == "A") {
             arriveCar( inputStack->head);
             inputStack->Pop();
         } else {
             checkCarPos(inputStack->head);
             inputStack->Pop();
+        }
+    }
+}
+
+void Garage::returnCar(int tempCars, bool isLane1) {
+    if (isLane1) {
+        for (int i = 0; i < tempCars; i++) {
+            lane1.Push(lane2.head);
+            lane2.Pop();
+        }
+        if (street.head == nullptr) {
+            return;
+        } else {
+            while (street.head != nullptr) {
+                lane1.Push(street.head);
+                street.Pop();
+            }
+        }
+    } else {
+        for (int i = 0; i < tempCars; i++) {
+            lane2.Push(lane1.head);
+            lane1.Pop();
+        }
+        if (street.head == nullptr) {
+            return;
+        } else {
+            while (street.head != nullptr) {
+                lane2.Push(street.head);
+                street.Pop();
+            }
         }
     }
 }
