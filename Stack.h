@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <cstdlib>     /* srand, rand */
 #include <ctime>       /* time */
+#include <utility>
 
 
 using namespace std;
@@ -56,6 +57,7 @@ public:
     string Pop();
     string Peek();
     bool isEmpty();
+
     void reverse();
     /**
      * Display Functions

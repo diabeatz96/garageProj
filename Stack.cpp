@@ -19,8 +19,9 @@ void Stack::loadFile() {
     /* Check if file is open, then we check if head is nullptr, if its not nullptr then do normal functionality
      *
      *
-     * **** Check first line then put into lane. No need to store into seperate stack.
+     * **** Check first line then put into lane. No need to store into seperate stack. //IMPORVEMENT FOR V2
      * */
+
     if(inFile.is_open()) {
         while (inFile >> line) {
             Car* temp = new Car();
@@ -159,4 +160,5 @@ int Stack::getStackSize() const {
 void Stack::setStackSize(int stackSize) {
     Stack::stackSize = stackSize;
 }
+
 

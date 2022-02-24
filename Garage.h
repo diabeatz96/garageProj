@@ -13,14 +13,14 @@ class Garage {
 
 public:
 
-    Stack garage1;
-    Stack garage2;
+    Stack lane1;
+    Stack lane2;
     Stack street;
     Stack tempStack;
 
 
     void decideAction(Stack* inputStack);
-    void departCar(Car* newCar);
+    void departCar(Car* newCar, Stack& lane1, bool isLane1);
     void arriveCar(Car* newCar);
     bool checkCarPos(Car* newCar);
     void printOutput();

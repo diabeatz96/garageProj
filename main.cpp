@@ -8,8 +8,8 @@ int main() {
 Garage newGarage;
 Stack newstack;
 
-newGarage.garage1.setName("Garage 1");
-newGarage.garage2.setName("Garage 2");
+newGarage.lane1.setName("Garage 1");
+newGarage.lane2.setName("Garage 2");
 
 newstack.loadFile();
 newstack.reverse();
@@ -27,7 +27,7 @@ newstack.reverse();
 )";
 
     newGarage.decideAction(&newstack);
-    newGarage.garage1.displayAll();
+    newGarage.lane1.displayAll();
 
 
     std::cout << R"(
@@ -40,7 +40,7 @@ newstack.reverse();
                                  /____/
 )";
 
-newGarage.garage2.displayAll();
+newGarage.lane2.displayAll();
 
 string temp;
 cin >> temp;

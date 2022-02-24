@@ -10,7 +10,10 @@ using namespace std;
 
 /**
  * Car should be a data type for data not a node class itself.
+ *
+ * Will update on V2 of Project.
  */
+
 struct Car {
     string name;
     string garage;
