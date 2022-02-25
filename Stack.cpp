@@ -98,11 +98,13 @@ void Stack::displayAll() {
     Car * current = head;
 
     while (current != nullptr) {
-        usleep(1000000);
+        /*
         srand (time(NULL));
         int color = rand() % 14 + 1;
-
         textcolor(color);
+        */
+
+        /*
         std::cout << R"(
 
                  ______
@@ -110,7 +112,8 @@ void Stack::displayAll() {
                (   _    _ _\
               =`-(_)--(_)-'
 
-)";
+)";n*/
+
         cout << "NAME:" << current-> name << "\t";
         cout << "GARAGE: " << this->getName() << "\t";
         cout << "TIMES MOVED: " << current->timesMoved << "\t";

@@ -15,33 +15,11 @@ newstack.loadFile();
 newstack.reverse();
 
 
-    std::cout << R"(
 
-   ______                                                 ___
-  / ____/  ____ _   _____  ____ _   ____ _  ___          <  /
- / / __   / __ `/  / ___/ / __ `/  / __ `/ / _ \         / /
-/ /_/ /  / /_/ /  / /    / /_/ /  / /_/ / /  __/        / /
-\____/   \__,_/  /_/     \__,_/   \__, /  \___/        /_/
-                                 /____/
-
-)";
-
-    newGarage.decideAction(&newstack);
-    newGarage.lane1.displayAll();
+newGarage.decideAction(&newstack);
 
 
-    std::cout << R"(
-
-   ______                                                 ___
-  / ____/  ____ _   _____  ____ _   ____ _  ___          |__ \
- / / __   / __ `/  / ___/ / __ `/  / __ `/ / _ \         __/ /
-/ /_/ /  / /_/ /  / /    / /_/ /  / /_/ / /  __/        / __/
-\____/   \__,_/  /_/     \__,_/   \__, /  \___/        /____/
-                                 /____/
-)";
-
-newGarage.lane2.displayAll();
-
+/*
     std::cout << R"(
 
   ________  ___________  _______    _______   _______  ___________
@@ -53,8 +31,7 @@ newGarage.lane2.displayAll();
 (_______/       \__|   |__|  \___) \_______) \_______)     \__|
 
 )";
-
-    newGarage.street.displayAll();
+*/
 
 string temp;
 cin >> temp;

@@ -76,6 +76,8 @@ void Garage::arriveCar(Car* newCar) {
     if(lane1.stackSize == 10  && lane2.stackSize == 10) { cout << "GARAGE FULL. GO HOME"; return;}
      lane1.stackSize < 10 ? lane1.Push(newCar) : lane2.Push(newCar);
 
+    printOutput();
+
 }
 
 /*
@@ -168,6 +170,32 @@ bool Garage::checkCarPos(Car* newCar) {
 
 
     void Garage::printOutput() {
+        usleep(1000000);
+        system("cls");
+        std::cout << R"(
+
+   ______                                                 ___
+  / ____/  ____ _   _____  ____ _   ____ _  ___          <  /
+ / / __   / __ `/  / ___/ / __ `/  / __ `/ / _ \         / /
+/ /_/ /  / /_/ /  / /    / /_/ /  / /_/ / /  __/        / /
+\____/   \__,_/  /_/     \__,_/   \__, /  \___/        /_/
+                                 /____/
+
+)";
+        lane1.displayAll();
+
+        std::cout << R"(
+
+   ______                                                 ___
+  / ____/  ____ _   _____  ____ _   ____ _  ___          |__ \
+ / / __   / __ `/  / ___/ / __ `/  / __ `/ / _ \         __/ /
+/ /_/ /  / /_/ /  / /    / /_/ /  / /_/ / /  __/        / __/
+\____/   \__,_/  /_/     \__,_/   \__, /  \___/        /____/
+                                 /____/
+)";
+
+        lane2.displayAll();
+
 
     }
 
