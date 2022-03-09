@@ -97,6 +97,14 @@ bool Stack::isEmpty() {
 void Stack::displayAll() {
     Car * current = head;
 
+    for(int i = 0; i < stackSize; i++) {
+        std::cout << R"(
+.-'--`-._
+'-O---O--'
+)";
+    }
+
+
     while (current != nullptr) {
         /*
         srand (time(NULL));

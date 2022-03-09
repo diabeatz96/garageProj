@@ -39,10 +39,12 @@ void Garage::departCar(Stack &lane, bool isLane1) {
                      temp = temp->next;
                      tempStack.Pop();
                      tempsize++;
+                     printOutput();
                  } else {
                      street.Push(temp);
                      temp = temp->next;
                      tempStack.Pop();
+                     printOutput();
                  }
              }
          }
@@ -57,10 +59,12 @@ void Garage::departCar(Stack &lane, bool isLane1) {
                      temp = temp->next;
                      tempStack.Pop();
                      tempsize++;
+                     printOutput();
                  } else {
                      street.Push(temp);
                      tempStack.Pop();
                      temp = temp->next;
+                     printOutput();
                  }
              }
          }
@@ -174,29 +178,41 @@ bool Garage::checkCarPos(Car* newCar) {
         system("cls");
         std::cout << R"(
 
-   ______                                                 ___
-  / ____/  ____ _   _____  ____ _   ____ _  ___          <  /
- / / __   / __ `/  / ___/ / __ `/  / __ `/ / _ \         / /
-/ /_/ /  / /_/ /  / /    / /_/ /  / /_/ / /  __/        / /
-\____/   \__,_/  /_/     \__,_/   \__, /  \___/        /_/
-                                 /____/
+ _                        __
+| |                      /  |
+| |     __ _ _ __   ___  `| |
+| |    / _` | '_ \ / _ \  | |
+| |___| (_| | | | |  __/ _| |_
+\_____/\__,_|_| |_|\___| \___/
 
 )";
         lane1.displayAll();
 
         std::cout << R"(
 
-   ______                                                 ___
-  / ____/  ____ _   _____  ____ _   ____ _  ___          |__ \
- / / __   / __ `/  / ___/ / __ `/  / __ `/ / _ \         __/ /
-/ /_/ /  / /_/ /  / /    / /_/ /  / /_/ / /  __/        / __/
-\____/   \__,_/  /_/     \__,_/   \__, /  \___/        /____/
-                                 /____/
+ _                        _____
+| |                      / __  \
+| |     __ _ _ __   ___  `' / /'
+| |    / _` | '_ \ / _ \   / /
+| |___| (_| | | | |  __/ ./ /___
+\_____/\__,_|_| |_|\___| \_____/
+
 )";
 
         lane2.displayAll();
 
+        std::cout << R"(
 
+  ________  ___________  _______    _______   _______  ___________
+ /"       )("     _   ")/"      \  /"     "| /"     "|("     _   ")
+(:   \___/  )__/  \\__/|:        |(: ______)(: ______) )__/  \\__/
+ \___  \       \\_ /   |_____/   ) \/    |   \/    |      \\_ /
+  __/  \\      |.  |    //      /  // ___)_  // ___)_     |.  |
+ /" \   :)     \:  |   |:  __   \ (:      "|(:      "|    \:  |
+(_______/       \__|   |__|  \___) \_______) \_______)     \__|
+
+)";
+        street.displayAll();
     }
 
 
@@ -218,6 +234,7 @@ void Garage::returnCar(int tempCars, bool isLane1) {
         for (int i = 0; i < tempCars; i++) {
             lane1.Push(lane2.head);
             lane2.Pop();
+            printOutput();
         }
         if (street.head == nullptr) {
             return;
@@ -225,6 +242,7 @@ void Garage::returnCar(int tempCars, bool isLane1) {
             while (street.head != nullptr) {
                 lane1.Push(street.head);
                 street.Pop();
+                printOutput();
             }
         }
     } else {
@@ -232,6 +250,7 @@ void Garage::returnCar(int tempCars, bool isLane1) {
         for (int i = 0; i < tempCars; i++) {
             lane2.Push(lane1.head);
             lane1.Pop();
+            printOutput();
         }
         if (street.head == nullptr) {
             return;
@@ -239,6 +258,7 @@ void Garage::returnCar(int tempCars, bool isLane1) {
             while (street.head != nullptr) {
                 lane2.Push(street.head);
                 street.Pop();
+                printOutput();
             }
         }
     }
